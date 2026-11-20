@@ -11,7 +11,7 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
@@ -27,6 +27,26 @@ if (existsSync(join(here, 'screenshots'))) {
   cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
 }
 
+// Verify the copy landed: every file the guide needs must exist in the output and
+// be non-empty, or the entry would hand the judge a broken guide. Fail loudly and
+// name the file instead of silently shipping a partial copy.
+function requireNonEmpty(path) {
+  if (!existsSync(path) || statSync(path).size === 0) {
+    throw new Error(`output is missing or empty: ${path}`);
+  }
+}
+
+for (const rel of ['app/index.html', 'app/app.js', 'app/style.css', 'app/data/trophies.json']) {
+  requireNonEmpty(join(out, rel));
+}
+const shots = readdirSync(join(out, 'screenshots')).filter((f) => f.endsWith('.jpg'));
+if (shots.length === 0) {
+  throw new Error(`output is missing or empty: ${join(out, 'screenshots')} (no screenshots copied)`);
+}
+for (const shot of shots) {
+  requireNonEmpty(join(out, 'screenshots', shot));
+}
+
 // The scorer's own caps (reference/gate.json): only text_max_bytes shapes the bytes; the
 // others refuse an entry the scorer would refuse (more than 4 screenshots or one over 256 KiB;
 // more than 993 files and directories in app/ or 48 MiB of app files: app/ counts beside
@@ -40,3 +60,6 @@ writeFileSync(
     app_max_bytes: 50331648,
   }),
 );
+
+// The dossier is what the judge reads first — confirm it was actually written.
+requireNonEmpty(join(out, 'dossier.json'));
