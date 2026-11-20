@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Platinum — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff2e88'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EVI%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies</p>
+    <h1>Leonida Platinum</h1>
+    <p class="sub">The full trophy guide and tracker. Tick trophies off as you earn them — your progress is saved in this browser, offline. Nothing leaves your machine.</p>
+    <div class="progress-wrap">
+      <svg class="ring" width="96" height="96" viewBox="0 0 96 96" aria-hidden="true">
+        <circle class="ring-bg" cx="48" cy="48" r="40"></circle>
+        <circle class="ring-fg" id="ringFg" cx="48" cy="48" r="40"></circle>
+      </svg>
+      <div class="progress-num">
+        <strong id="progressPct">0%</strong>
+        <span id="progressCount">0 of 55 earned</span>
+      </div>
+      <div class="grade-counts" id="gradeCounts"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="roadmap" aria-labelledby="roadmapH">
+    <h2 id="roadmapH">Roadmap to the Platinum</h2>
+    <p class="roadmap-note">Four phases, in order. The only trophies you can truly miss are in Phase 2 — do them before the final mission.</p>
+    <ol class="phases">
+      <li>
+        <span class="phase-no">1</span>
+        <div>
+          <h3>Play the story</h3>
+          <p>Chapters 1–4 and the final mission, plus the named story missions (Breakfast Run, The Cartel Heist, Child's Play, Headliners, VCIA Takedown, Operation Savage Glory). All unmissable — just play. <strong id="roadmapStory">0 / 12</strong> story trophies.</p>
+        </div>
+      </li>
+      <li>
+        <span class="phase-no">2</span>
+        <div>
+          <h3>Grab the missables — before the finale</h3>
+          <p><strong>13 missable trophies.</strong> They are one-time moments, partner activities or story choices. When one appears, do it there and then. <strong id="roadmapMiss">0 / 13</strong> missable trophies. Use the Missable filter below to see them all.</p>
+        </div>
+      </li>
+      <li>
+        <span class="phase-no">3</span>
+        <div>
+          <h3>Strangers, activities &amp; side content</h3>
+          <p>Finish the stranger strands (Andy, Kenton, Billy, Randy, Tyrone), the 8-strand set, races, shooting range, drone races, fishing, arcade, meditation, hunting and the rest. <strong id="roadmapSide">0 / 24</strong> side trophies.</p>
+        </div>
+      </li>
+      <li>
+        <span class="phase-no">4</span>
+        <div>
+          <h3>Cleanup — collectibles &amp; 100%</h3>
+          <p>Card sets, WAiNK locations, meditation spots, 100 vehicles, garage properties, laundered bills and the 50 challenges. Finish with <strong>A Long Road</strong> (100% completion) and the Platinum pops. <strong id="roadmapColl">0 / 5</strong> collectible trophies.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="tracker" aria-labelledby="trackerH">
+    <h2 id="trackerH">Trophy checklist</h2>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search trophies…" aria-label="Search trophies">
+      <select id="sort" aria-label="Sort trophies">
+        <option value="roadmap">Sort: roadmap order</option>
+        <option value="grade">Sort: by grade</option>
+        <option value="name">Sort: by name</option>
+      </select>
+      <label class="spoiler"><input id="spoiler" type="checkbox" checked> Hide story spoilers</label>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter trophies"></div>
+    <div class="actions">
+      <button id="export" type="button">Export progress</button>
+      <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
+      <button id="reset" type="button" class="danger">Reset progress</button>
+      <span id="shownCount" class="shown"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p id="empty" class="empty" hidden>No trophies match this filter.</p>
+  </section>
+</main>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+    <p class="modal-grade" id="modalGrade"></p>
+    <h3 id="modalName"></h3>
+    <p class="modal-desc" id="modalDesc"></p>
+    <p class="modal-meta" id="modalMeta"></p>
+    <h4>How to get it</h4>
+    <p id="modalGuide"></p>
+    <label class="modal-earned"><input id="modalEarned" type="checkbox"> Earned</label>
+  </div>
+</div>
+
+<footer>
+  <p>Leonida Platinum is an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with or endorsed by Rockstar Games or Take-Two. Trophy list: the official 55 PS5 trophies. All data is stored locally in your browser.</p>
+</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
